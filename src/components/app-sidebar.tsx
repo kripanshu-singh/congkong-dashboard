@@ -35,6 +35,11 @@ const data = {
       url: "/",
       icon: IconChartBar,
     },
+    {
+      title: "Participants",
+      url: "/participants",
+      icon: IconUsers,
+    },
   ],
 };
 
