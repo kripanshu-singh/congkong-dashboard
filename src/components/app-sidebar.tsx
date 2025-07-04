@@ -40,6 +40,11 @@ const data = {
       url: "/participants",
       icon: IconUsers,
     },
+    {
+      title: "Meetings",
+      url: "/meetings",
+      icon: IconListDetails,
+    }
   ],
 };
 
