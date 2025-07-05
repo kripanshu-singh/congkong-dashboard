@@ -44,7 +44,12 @@ const data = {
       title: "Meetings",
       url: "/meetings",
       icon: IconListDetails,
-    }
+    },
+    {
+      title: "Kripanshu Singh",
+      url: "https://kripanshu-singh.github.io/me/",
+      icon: IconUserSquare,
+    },
   ],
 };
 
