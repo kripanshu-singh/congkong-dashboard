@@ -151,7 +151,7 @@ yarn dev
   
   **🚀 Live Demo**
   
-  [View Live Application](swdkmdkkldmcflkvmlkemdklmclkmdmxclmdmckdamscmlkdmklmwklecdnkvnkdnsklj)
+  [View Live Application](https://congkong-dashboard-kripanshu.vercel.app/)
   
   *Deployed with Vercel
   

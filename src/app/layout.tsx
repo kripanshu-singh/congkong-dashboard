@@ -5,7 +5,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/HeadNav";
-
+import { Analytics } from "@vercel/analytics/next";
 import { LoadingOverlay } from "@/components/loading-overlay";
 import { NavigationProvider } from "./context/navigation-context";
 
@@ -52,6 +52,7 @@ export default function RootLayout({
                   <SiteHeader />
                   <LoadingOverlay />
                   {children}
+                  <Analytics />
                 </main>
               </div>
             </SidebarProvider>
