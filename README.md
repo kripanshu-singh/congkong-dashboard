@@ -163,7 +163,7 @@ yarn dev
   
   **📹 Project Walkthrough**
   
-  [Watch the Demo Video](#)
+  [Watch the Demo Video](https://drive.google.com/file/d/1iK9h_-swDNVGgk1qNM64oK8voqp3sC5d/view?usp=sharing)
   
   *Showcasing features and functionality*
   
