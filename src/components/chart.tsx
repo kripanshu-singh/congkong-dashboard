@@ -110,13 +110,15 @@ export function ChartAreaInteractive({
               type="natural"
               fill="url(#fillLogins)"
               stroke="var(--chart-1)"
-            />
+              dot={true}
+              />
             <Area
               yAxisId="right"
               dataKey="meetings"
               type="natural"
               fill="url(#fillMeetings)"
               stroke="var(--chart-2)"
+              dot={true}
             />
             <ChartLegend
               content={<ChartLegendContent payload={data} className="" />}
