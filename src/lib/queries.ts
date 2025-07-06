@@ -4,6 +4,7 @@ import { MeetingInAnticipation } from "@/dto/MeetingInAnticipation";
 import { Participant } from "@/dto/Participant";
 import { TopParticipant } from "@/dto/TopParticipant";
 import { supabase } from "@/lib/supabaseClient";
+import { time } from "console";
 
 export async function getDashboardKpis() {
   const { data, error } = await supabase
@@ -46,7 +47,13 @@ export async function getTopParticipants(): Promise<TopParticipant[]> {
 export async function getMeetingsInAnticipation(): Promise<
   MeetingInAnticipation[]
 > {
-  const { data, error } = await supabase.from("meetings").select("*");
+  const now = new Date().toISOString();
+
+  const { data, error } = await supabase
+    .from("meetings")
+    .select("*")
+    .order("time", { ascending: true })
+    .gt("time", now);
 
   if (error) {
     console.error(error);
