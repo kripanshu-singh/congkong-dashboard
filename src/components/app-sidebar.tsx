@@ -26,8 +26,7 @@ const data = {
   user: {
     name: "Juno Yu",
     email: "jxy1@calluscompany.com",
-    avatar:
-      "https://media.licdn.com/dms/image/v2/C4D03AQG6RpNu9eWnhg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1655268759218?e=1756944000&v=beta&t=3vsKBCVY13tfdiKl9yAsYTCNsr7zQJoeAgdd8LoSBMg",
+    avatar: "/img.jpeg",
   },
   navMain: [
     {
