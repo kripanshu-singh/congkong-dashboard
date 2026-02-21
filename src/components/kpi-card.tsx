@@ -7,7 +7,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
-import CountUp from "react-countup";
+import { useEffect, useMemo, useState } from "react";
 
 type KpiProps = {
   kpis: {
@@ -26,14 +26,7 @@ export function KpiCard({ kpis }: KpiProps) {
         <CardHeader>
           <CardDescription>Total Participants</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {kpis && (
-              <CountUp
-                start={0}
-                end={kpis.total_participants}
-                duration={1}
-                separator=","
-              />
-            )}
+            <AnimatedNumber value={kpis?.total_participants ?? 0} />
           </CardTitle>
         </CardHeader>
       </Card>
@@ -42,15 +35,7 @@ export function KpiCard({ kpis }: KpiProps) {
         <CardHeader>
           <CardDescription>Avg Satisfaction</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {kpis && (
-              <CountUp
-                start={0}
-                end={kpis?.avg_satisfaction}
-                duration={1}
-                separator=","
-              />
-            )}
-            %
+            <AnimatedNumber value={kpis?.avg_satisfaction ?? 0} />%
           </CardTitle>
         </CardHeader>
       </Card>
@@ -59,15 +44,7 @@ export function KpiCard({ kpis }: KpiProps) {
         <CardHeader>
           <CardDescription>Dropped Off (%)</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {kpis && (
-              <CountUp
-                start={0}
-                end={kpis?.dropped_off_percentage}
-                duration={1}
-                separator=","
-              />
-            )}
-            %
+            <AnimatedNumber value={kpis?.dropped_off_percentage ?? 0} />%
           </CardTitle>
         </CardHeader>
       </Card>
@@ -76,17 +53,50 @@ export function KpiCard({ kpis }: KpiProps) {
         <CardHeader>
           <CardDescription>Total Matches</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {kpis && (
-              <CountUp
-                start={0}
-                end={kpis?.total_matches}
-                duration={1}
-                separator=","
-              />
-            )}
+            <AnimatedNumber value={kpis?.total_matches ?? 0} />
           </CardTitle>
         </CardHeader>
       </Card>
     </div>
   );
+}
+
+function AnimatedNumber({
+  value,
+  durationMs = 1000,
+}: {
+  value: number;
+  durationMs?: number;
+}) {
+  const [display, setDisplay] = useState(0);
+
+  const formatter = useMemo(() => {
+    const decimals = Number.isInteger(value) ? 0 : 2;
+    return new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+  }, [value]);
+
+  useEffect(() => {
+    let frame = 0;
+    const from = 0;
+    const to = Number.isFinite(value) ? value : 0;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / durationMs, 1);
+      const next = from + (to - from) * progress;
+      setDisplay(next);
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [value, durationMs]);
+
+  return <span>{formatter.format(display)}</span>;
 }
